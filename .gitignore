@@ -1,9 +1,6 @@
 # Compiled class file
 *.class
 
-# Log file
-*.log
-
 # BlueJ files
 *.ctxt
 
@@ -22,3 +19,30 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Ignore Eclipse specific files
+.classpath
+.project
+.settings/
+
+# Ignore build output
+bin/
+target/
+
+# Ignore Maven dependencies (if using Maven)
+.mvn/
+*.iml
+*.log
+
+# Ignore temporary files and OS-specific files
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ignore IDE configuration (if using IntelliJ or VS Code too)
+.idea/
+.vscode/
+
+# Ignore environment files (if using API keys or configs)
+.env
