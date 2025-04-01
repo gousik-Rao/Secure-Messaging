@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Messaging App</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+	<link rel="apple-touch-icon" sizes="180x180" th:href="@{/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/site.webmanifest}">
+
+</head>
+
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Secure Messaging Gateway</h1>
+        <div class="navbar">
+            <nav>
+                <ul>
+                    <!-- Check if the user is logged in -->
+                    <li th:if="${session.userId != null}"><a href="#profile">Profile</a></li>
+                    <li th:if="${session.userId != null}"><a href="#dashboard">Dashboard</a></li>
+                    <li th:if="${session.userId != null}"><a href="#messages">Messages</a></li>
+                    <li th:if="${session.userId != null}"><a href="#plans">Plans</a></li>
+                    <li th:if="${session.userId != null}"><a href="#reports">Reports</a></li>
+                    <li th:if="${session.userId != null}"><a th:href="@{/logout}">Log Out</a></li>
+
+                    <!-- Guest user links -->
+                    <li th:if="${session.userId == null}"><a th:href="@{/login}">Log In</a></li>
+                    <li th:if="${session.userId == null}"><a th:href="@{/register}">Register</a></li>
+
+                    <li><a href="#profile">Profile</a></li>
+                </ul>
+            </nav>
+            <a><i class="fa-solid fa-bars fa-xl" id="menutoggle"></i></a>
+        </div>
+        
+        <aside class="sidebar">
+			<p style="text-align: right;">
+				<i class="fa-solid fa-xmark" style="color: #f2f2f2;padding:20px 30px" id="closebar"></i>
+			</p>
+            <ul>
+                 <!-- Logged-in user links -->
+                <li th:if="${session.userId != null}"><a href="#profile">Profile</a></li>
+                <li th:if="${session.userId != null}"><a href="#dashboard">Dashboard</a></li>
+                <li th:if="${session.userId != null}"><a href="#messages">Messages</a></li>
+                <li th:if="${session.userId != null}"><a href="#plans">Plans</a></li>
+                <li th:if="${session.userId != null}"><a href="#reports">Reports</a></li>
+                <li th:if="${session.userId != null}"><a th:href="@{/logout}">Log Out</a></li>
+
+                <!-- Guest user links -->
+                <li th:if="${session.userId == null}"><a th:href="@{/login}">Log In</a></li>
+                <li th:if="${session.userId == null}"><a th:href="@{/register}">Register</a></li>
+            </ul>
+        </aside>
+        <!-- Backdrop -->
+		<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    </header>
+
+    <div class="layout">
+
+        <main class="main-section">
+        <div class="grid-layout">
+        	<!-- First Column -->
+            <div class="first-column">
+                <section id="dashboard">
+                    <h2>Welcome to Secure Messaging</h2>
+                    <p>Your secure platform for military communication.</p>
+                </section>
+
+                <section id="messages" title="Messages">
+                    <h2>Messages</h2><i class="fa-solid fa-envelope"></i>
+                    <p>Send and receive encrypted messages here.</p>
+                </section>
+
+				<section id="profile" title="Profile">
+					<h2>Profile</h2><i class="fa-solid fa-user"></i>
+					<p>Manage your account settings and profile.</p>
+				</section>
+
+				<section id="contacts" title="Contacts">
+					<h2>Contacts</h2><i class="fa-solid fa-address-book"></i>
+					<p>Manage your contacts securely.</p>
+				</section>
+	
+				<section id="notifications" title="Notifications">
+					<h2>Notifications</h2><i class="fa-regular fa-bell"></i>
+					<p>Stay updated with real-time notifications.</p>
+				</section>
+            </div>
+
+            <!-- Second Column -->
+            <div class="second-column">
+                <section id="plans" title="Plans">
+                    <h2>Plans</h2><i class="fa-solid fa-sheet-plastic"></i>
+                    <p>Collaborate on strategic plans securely.</p>
+                </section>
+
+                <section id="reports" title="Reports">
+                    <h2>Reports</h2><i class="fa-solid fa-file-export"></i>
+                    <p>Access detailed analytics and insights.</p>
+                </section>
+
+                <section id="updates" title="Updates">
+                    <h2>Latest Updates</h2><i class="fa-solid fa-pen-to-square"></i>
+                    <p>Stay informed with the latest updates and news.</p>
+                </section>
+
+				<section id="tasks" title="Tasks">
+					<h2>Tasks</h2><i class="fa-solid fa-list-check"></i>
+					<p>Manage your tasks efficiently.</p>
+				</section>
+            </div>
+
+			 <!-- Third Column -->
+			 <div class="third-column">
+                <section id="about" title="About">
+                    <h2>About This Web App</h2>
+                    <p>This platform provides secure communication and collaboration tools for military personnel.</p>
+					<p>Our web app ensures that all communications are encrypted end-to-end, providing the highest level of security for sensitive information.</p>
+        			<p>Our platform is designed to be user-friendly, with an intuitive interface that makes it easy for users to navigate and access the features they need.</p>
+        			<p>We are committed to providing the highest level of security and reliability, ensuring that our users can communicate and collaborate with confidence.</p>
+
+                </section>
+
+                <section id="features" title="Features">
+                    <h2>Features</h2><i class="fa-solid fa-layer-group"></i>
+                    <ul>
+                        <li>End-to-end encryption</li>
+                        <li>Real-time messaging</li>
+                        <li>Secure file sharing</li>
+                        <li>Collaborative planning tools</li>
+                        <li>Detailed reporting and analytics</li>
+                    </ul>
+                </section>
+            </div>
+    	</div>
+        </main>
+        
+		<div id="security-images">
+			<h2>Security in Messaging</h2>
+			<div class="images-container">
+				<img src="https://media.istockphoto.com/id/1312226990/photo/cyber-security-phishing-e-mail-network-security-computer-hacker-cloud-computing.jpg?s=612x612&w=0&k=20&c=AVoq3BuFUCH1rNxxcKkfrq7-sN6fgr_Pq8QGx67nxKI=" 
+						alt="Security Image 1" class="animated-image left">
+						<!-- Security icon -->
+						<div class="security-icon">
+							<i class="fa-solid fa-user-shield fa-beat"></i>
+						</div>
+				<img src="https://media.istockphoto.com/id/1310129244/photo/cybersecurity-digital-technology-security.jpg?s=612x612&w=0&k=20&c=XSRX5g2bwK-PDcHYEFhDIlDb2QJBpHwBog0tiAvmCpg=" 
+						alt="Security Image 2" class="animated-image right">
+			</div>
+		</div>
+
+		<!-- Additional Sections Below the Columns -->
+		<div class="additional-sections">
+	
+			<section id="feature-details">
+				<h2 class="feature-heading">Feature Details</h2>
+				<div class="feature-container">
+
+					<div class="feature-left">
+
+						<div class="feature">
+							<h3 style="display: inline; margin-right: 10px;">End-to-end Encryption</h3><i class="fa-solid fa-lock fa-bounce"></i>
+							<p>All messages are encrypted from sender to receiver.</p>
+						</div>
+
+						<div class="feature">
+							<h3 style="display: inline; margin-right: 10px;">Collaborative Planning Tools</h3><i class="fa-solid fa-down-left-and-up-right-to-center fa-flip"></i>
+							<p>Plan and execute strategies with your team.</p>
+						</div>
+
+						<div class="feature">
+							<h3 style="display: inline; margin-right: 10px;">Detailed Reporting and Analytics</h3><i class="fa-solid fa-clipboard-list fa-spin"></i>
+							<p>Get insights and analytics on your communication.</p>
+						</div>
+
+					</div>
+
+					<div class="feature-right">
+						<img src="https://media.istockphoto.com/id/1156765043/photo/futuristic-mail-connections-background.jpg?s=612x612&w=0&k=20&c=wwOq0qIl3Zp-AC4O3NmulIvtUvFuENrWsSsEsi_vNOA=" 
+									alt="Feature Image" class="feature-image">
+					</div>
+				</div>
+			</section>
+		</div>
+
+
+        <!-- Buttons for Login and Register -->
+    	<div class="bottom-center-buttons">
+    	    <a th:href="@{/register}" class="action-btn" id="register">SIGN UP</a>
+        	<a href="@{/login}" class="action-btn" id="login">LOGIN</a>
+    	</div>
+    </div>
+
+	<!-- Footer Section -->
+    <footer>
+		<div class="footer-content">
+			<div class="footer-left-center">
+				<div class="footer-left">
+					<i class="fa-brands fa-facebook fa-2xl" id="icon" title="Facebook"></i>
+					<i title="X aka Twitter" id="icon" class="fa-brands fa-twitter fa-2xl"></i>
+					<i id="icon" class="fa-brands fa-square-instagram fa-2xl" title="Instagram"></i>
+				</div>
+				<div class="footer-center">
+					<ul>
+						<li><a href="#privacy-policy">Privacy Policy</a></li>
+						<li><a href="#terms">Terms of Service</a></li>
+						<li><a href="#contact">Contact Us</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="footer-right">
+				<p>&copy; 2025 Secure Messaging App. All rights reserved.</p>
+			</div>
+		</div>
+    </footer>
+
+	<!-- Error Handling -->
+	<div class="overlay" id="overlay" th:if="${errorMessage != null}">
+		<div class="popup">
+			<p th:text="@{errorMessage}"></p>
+			<button onclick="closePopup()">Close</button>
+		</div>
+	</div>
+
+	<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,220 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org'>
+<head>
+	<meta charset="UTF-8">
+	<title>Secure Messaging App</title>
+	
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+</head>
+<body>
+
+	<!-- Header Section -->
+    <header>
+        <h1>Secure Messaging Gateway</h1>
+        <div class="navbar">
+            <nav>
+                <ul>
+
+                    <%
+                    // Check if the user is logged in
+                    Integer userId = (Integer) session.getAttribute("userId");
+                    String username = (String) session.getAttribute("username");
+                    String email = (String) session.getAttribute("userEmail");
+                    if (userId != null) {
+                    %>
+                    <!-- Logged-in user links -->
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#messages">Messages</a></li>
+                    <li><a href="#plans">Plans</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="<%= request.getContextPath() %>/logout">Log Out</a></li>
+                    <%
+                    } else {
+                    %>
+                    <!-- Guest user links -->
+                    <li><a href="<%= request.getContextPath() %>/login">Log In</a></li>
+                    <li><a href="<%= request.getContextPath() %>/register">Register</a></li>
+                    <%
+                    }
+                    %>
+                    <li><a href="#profile">Profile</a></li>
+                </ul>
+            </nav>
+            <a><i class="fa-solid fa-bars fa-xl" id="menutoggle"></i></a>
+        </div>
+        
+        <aside class="sidebar">
+			<p style="text-align: right;">
+				<i class="fa-solid fa-xmark" style="color: #f2f2f2;padding:20px 30px" id="closebar"></i>
+			</p>
+            <ul>
+                <%
+                    // Check if the user is logged in
+                    if (userId != null) {
+                    %>
+                    <!-- Logged-in user links -->
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#messages">Messages</a></li>
+                    <li><a href="#plans">Plans</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="<%= request.getContextPath() %>/logout">Log Out</a></li>
+                    <%
+                    } else {
+                    %>
+                    <!-- Guest user links -->
+                    <li><a href="<%= request.getContextPath() %>/login">Log In</a></li>
+                    <li><a href="<%= request.getContextPath() %>/register">Register</a></li>
+                    <%
+                    }
+                    %>
+                    <li><a href="#profile">Profile</a></li>
+            </ul>
+        </aside>
+        <!-- Backdrop -->
+		<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    </header>
+
+    <!-- Getting the user session -->
+    
+    <!-- Welcome Section -->
+    <section id="welcome-section" class="section-welcome">
+        <h2 th:if="${session.username}" th:text="'Welcome, ' + ${session.username}"></h2>
+    </section>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Three Columns of Information -->
+        <div class="grid-layout">
+            <!-- First Column -->
+            <div class="first-column">
+                <section id="user-profile">
+                    <h2>User Profile</h2>
+                    <div class="user-card">
+                        <h3><%= username %></h3>
+                        <p>Email: <%= email %></p>
+                        <button class="edit-profile-btn">Edit Profile</button>
+                    </div>
+                </section>
+
+                <section id="unread-messages">
+                    <h2>Unread Messages</h2><i class="fa-solid fa-envelope fa-bounce"></i>
+                    <p>5</p>
+                </section>
+            </div>
+
+            <!-- Second Column -->
+            <div class="second-column">
+                <section id="active-plans">
+                    <h2>Active Plans</h2><i class="fa-solid fa-globe"></i>
+                    <p>3</p>
+                </section>
+
+                <section id="reports-submitted">
+                    <h2>Reports Submitted</h2><i class="fa-solid fa-clipboard-list"></i>
+                    <p>2</p>
+                </section>
+            </div>
+            <!-- Third Column -->
+            <div class="third-column">
+                <section id="latest-updates">
+                    <h2>Latest Updates</h2><i class="fa-solid fa-rss fa-beat-fade"></i>
+                    <p>Stay informed with the latest updates and news.</p>
+                </section>
+
+                <section id="features">
+                    <h2>Features</h2>
+                    <ul>
+                        <li>End-to-end encryption</li>
+                        <li>Collaborative planning tools</li>
+                        <li>Detailed reporting and analytics</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <!-- Image and Messaging Interface Section -->
+        <section id="image-messaging-section" class="section image-messaging">
+            <div class="image-container">
+                <img src="https://media.istockphoto.com/id/1156765043/photo/futuristic-mail-connections-background.jpg?s=612x612&w=0&k=20&c=wwOq0qIl3Zp-AC4O3NmulIvtUvFuENrWsSsEsi_vNOA=" 
+                        alt="Secure Messaging">
+            </div>
+            <div class="messaging-container">
+                <h2>Messages</h2>
+                <div class="chat-container">
+                    <a><i class="fa-solid fa-envelope-open-text" id="message-icon"></i></a>
+                    <div class="chat-box">
+                        <p class="message received">Hi! How can I assist you?</p>
+                        <p class="message sent">I need help with my plans.</p>
+                    </div>
+                    <form class="message-form" method="POST" action="${pageContext.request.contextPath}/message/sendmessage">
+                        <input type="hidden" name="senderId" value="<%= session.getAttribute("userId") %>">
+                        <label for="recipientId">Recipient ID:</label>
+                        <input type="text" id="recipientId" name="recipientId" placeholder="Enter recipient ID" required>
+                        <label for="messageContent">Message:</label>
+                        <textarea id="messageContent" name="messageContent" placeholder="Type your message..." required></textarea>
+                        <button type="submit" class="send-button">
+                            <i class="fa-solid fa-paper-plane"></i> Send
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer>
+		<div class="footer-content">
+			<div class="footer-left-center">
+				<div class="footer-left">
+					<i class="fa-brands fa-facebook fa-2xl" id="icon" title="Facebook"></i>
+					<i title="X aka Twitter" id="icon" class="fa-brands fa-twitter fa-2xl"></i>
+					<i id="icon" class="fa-brands fa-square-instagram fa-2xl" title="Instagram"></i>
+				</div>
+				<div class="footer-center">
+					<ul>
+						<li><a href="#privacy-policy">Privacy Policy</a></li>
+						<li><a href="#terms">Terms of Service</a></li>
+						<li><a href="#contact">Contact Us</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="footer-right">
+				<p>&copy; 2025 Secure Messaging App. All rights reserved.</p>
+			</div>
+		</div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+	rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+	rel="stylesheet">
+
+<link rel="apple-touch-icon" sizes="180x180"
+	href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+</head>
+
+
+<body>
+
+	<header>
+		<h1>Secure Messaging Gateway</h1>
+		<div class="navbar">
+			<nav>
+				<ul>
+					<!-- Check if the user is logged in -->
+					<th:block th:if="${userId != null}">
+						<li><a th:href="@{/profile}">Profile</a></li>
+						<li><a th:href="@{/dashboard}">Dashboard</a></li>
+						<li><a th:href="@{/messages}">Messages</a></li>
+						<li><a th:href="@{/plans}">Plans</a></li>
+						<li><a th:href="@{/reports}">Reports</a></li>
+						<li><a th:href="@{/logout}">Log Out</a></li>
+					</th:block>
+					<th:block th:unless="${userId != null}">
+						<li><a th:href="@{/login}">Log In</a></li>
+						<li><a th:href="@{/register}">Register</a></li>
+					</th:block>
+				</ul>
+			</nav>
+			<a><i class="fa-solid fa-bars fa-xl" id="menutoggle"></i></a>
+		</div>
+
+		<aside class="sidebar">
+			<p style="text-align: right;">
+				<i class="fa-solid fa-xmark"
+					style="color: #f2f2f2; padding: 20px 30px" id="closebar"></i>
+			</p>
+			<ul>
+				<li><a th:href="@{/dashboard}">Dashboard</a></li>
+				<li><a th:href="@{/messages}">Messages</a></li>
+				<li><a th:href="@{/plans}">Plans</a></li>
+				<li><a th:href="@{/reports}">Reports</a></li>
+			</ul>
+		</aside>
+	</header>
+
+	<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
