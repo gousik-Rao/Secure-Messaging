@@ -8,6 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      DATASOURCE_URL: jdbc:h2:mem:testdb
+      DATASOURCE_USERNAME: sa
+      DATASOURCE_PASSWORD: ""
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
