@@ -2,9 +2,9 @@ package com.military.Service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;  // ✅ Correct import
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.military.Entity.User;
 import com.military.Exceptions.UserExistsException;
@@ -26,6 +27,9 @@ public class UserServiceTest {
 
 	@Mock
 	private UserRepo userRepo;
+	
+	@Mock
+	private PasswordEncoder passwordEncoder;
 	
 	@InjectMocks
 	private UserService userService;
