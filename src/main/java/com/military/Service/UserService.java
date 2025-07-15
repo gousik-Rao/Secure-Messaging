@@ -25,8 +25,11 @@ public class UserService {
 
 //	New user registration
 	public User registerUser(User user) {
+		// This line is mocked in the UserTestService file.
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
 		user.setAuthProvider(User.AuthProvider.LOCAL);
+		
 		String email = user.getEmail();
 		if(userRepo.findByEmail(email).isPresent())
 			throw new UserExistsException("User with email " + email + " already exists");
