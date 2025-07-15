@@ -9,11 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
       DATASOURCE_URL: jdbc:h2:mem:testdb
-      DATASOURCE_USERNAME: sa
+      DATASOURCE_USER: sa
       DATASOURCE_PASSWORD: ""
+      DATASOURCE_DRIVER: org.h2.Driver
+
+      GOOGLE_USERNAME: email
+      JWT_SECRET: test-secret
+      OAUTH_CLIENT_ID: dummy-client-id
+      CLIENT_SECRET: dummy-client-secret
+      SCOPE: profile,email
 
     steps:
       - uses: actions/checkout@v4
@@ -22,5 +27,5 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Build with Maven
+      - name: Build and Test with Maven
         run: mvn -B clean install
