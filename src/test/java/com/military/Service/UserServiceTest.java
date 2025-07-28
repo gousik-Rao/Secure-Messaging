@@ -19,9 +19,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.military.Entity.User;
-import com.military.Exceptions.UserExistsException;
-import com.military.Repository.UserRepo;
+import com.military.entity.User;
+import com.military.exceptions.UserExistsException;
+import com.military.repository.UserRepo;
+import com.military.service.UserService;
 
 public class UserServiceTest {
 
@@ -48,6 +49,9 @@ public class UserServiceTest {
 		newUser.setUsername("Test User");
 		
 		when(userRepo.findByEmail("test@gmail.com")).thenReturn(Optional.empty());
+		
+		when(passwordEncoder.encode("password123")).thenReturn("encoded-password123");
+		
 		when(userRepo.save(any(User.class))).thenReturn(newUser);
 		
 		User savedUser = userService.registerUser(newUser);
