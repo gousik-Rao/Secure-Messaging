@@ -1,15 +1,14 @@
-package com.military.Controller;
+package com.military.controller;
 
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -18,20 +17,14 @@ import com.military.dto.AuthResponseDTO;
 import com.military.service.UserService;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@ActiveProfiles("test") @AutoConfigureMockMvc
 public class UserLoginControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@SuppressWarnings("removal")
-	@MockBean // Mock service
+	@MockBean @SuppressWarnings("removal")
 	private UserService userService;
-	
-	@BeforeEach
-	void setUp() {
-		MockitoAnnotations.openMocks(this);
-	}
 	
 	@Test
 	void  loginUserTest() throws Exception {
@@ -41,14 +34,14 @@ public class UserLoginControllerTest {
 		
 		when(userService.validatingUser("testuser@gmail.com", "password123")).thenReturn(mockUser); 
 		
-		String json = "{\"email\":\"testuser@gmail.com\", \"password\":\"password123\"}";         
+		String json = "{\"email\":\"testuser@gmail.com\", \"password\":\"password123\"}";
+		
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
 				.contentType(MediaType.APPLICATION_JSON)
 			    .content(json))
-			.andExpect(MockMvcResultMatchers.status().isUnauthorized())
+			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.jsonPath("$.token").exists())
-			
-		.andExpect(MockMvcResultMatchers.jsonPath("$.user").value("testuser"));
+			.andExpect(MockMvcResultMatchers.jsonPath("$.user").value("testuser"));
 	}
 	
 	@Test

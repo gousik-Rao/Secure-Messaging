@@ -1,4 +1,4 @@
-package com.military.Service;
+package com.military.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,7 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.military.entity.User;
 import com.military.exceptions.UserExistsException;
 import com.military.repository.UserRepo;
-import com.military.service.UserService;
 
 public class UserServiceTest {
 

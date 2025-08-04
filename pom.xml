@@ -6,16 +6,16 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.7</version>
+		<version>3.4.8</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<packaging>jar</packaging>
 
 	<groupId>com.military</groupId>
-	<artifactId>Military-App</artifactId>
+	<artifactId>Chatify-App</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Military-App</name>
-	<description>A messaging app for secure messaging</description>
+	<name>Chatify-App</name>
+	<description>A messaging web app for secure messaging</description>
 	<url />
 	<licenses>
 		<license />
