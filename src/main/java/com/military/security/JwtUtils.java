@@ -13,14 +13,17 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Component
-public class JWTUtil {
+public class JwtUtils {
 
-	@Value("${jwt.secret}")
-	private static String secret_Key;
+	@Value("${spring.app.jwtSecret}")
+	private String secret_Key;
 	
-//	Generate JST Token
-	public static String generateToken(String username) {
-		if(username == null)
+    @Value("${spring.app.jwtExpirationMs}")
+    private int jwtExpirationMs;
+	
+//	Generate JWT Token
+	public String generateToken(String username) {
+		if(username == null || username.isBlank())
 			throw new IllegalArgumentException("Username cannot be null for token generation");      
 		
 		return Jwts.builder()
@@ -32,7 +35,7 @@ public class JWTUtil {
 	}
 	
 //	Extract username
-	public static String extractUsername(String token) {
+	public String extractUsername(String token) {
 			return Jwts.parserBuilder()
 								.setSigningKey(getSigningKey())
 								.build()
@@ -42,7 +45,7 @@ public class JWTUtil {
 	}
 	
 //	Converting SECRET_KEY to secure key instance
-	private static SecretKey getSigningKey() {
+	private SecretKey getSigningKey() {
 		byte[] keyBytes = Decoders.BASE64.decode(secret_Key);
 		return Keys.hmacShaKeyFor(keyBytes);
 	}

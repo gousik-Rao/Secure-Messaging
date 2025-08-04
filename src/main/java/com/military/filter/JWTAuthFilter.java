@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.military.security.JWTUtil;
+import com.military.security.JwtUtils;
 import com.military.service.CustomUserDetailsService;
 
 import jakarta.servlet.FilterChain;
@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JWTAuthFilter extends OncePerRequestFilter{
 
 	@Autowired
-	private JWTUtil jwtUtil;
+	private JwtUtils jwtUtil;
 	
 	@Autowired
 	private CustomUserDetailsService userDetailsService;
@@ -39,7 +39,7 @@ public class JWTAuthFilter extends OncePerRequestFilter{
 		}
 		
 		String token = authHeader.substring(7);
-		String username = JWTUtil.extractUsername(token);
+		String username = jwtUtil.extractUsername(token);
 		
 		if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
