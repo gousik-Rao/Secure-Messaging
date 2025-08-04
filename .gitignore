@@ -46,6 +46,7 @@ Thumbs.db
 
 # Ignore environment files (if using API keys or configs)
 .env
+.env.properties
 
 # Ignore Spring Boot specific files
 *.log
